@@ -19,9 +19,7 @@ function App() {
         <Route path='/create' element={<Create/>}></Route>
       </Routes>
         }
-      
       />
-      <h1>devang vangane</h1>
       
     </div>
   )

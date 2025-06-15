@@ -15,6 +15,7 @@ import {Link, useLocation} from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
@@ -23,6 +24,10 @@ export default function Navbar(props) {
     const location = useLocation();
     const path = location.pathname;
     const [open,setOpen] = React.useState(false);
+
+    const changeOpenStatus = ()=>{
+      setOpen(!open);
+    }
 
     const myDrawer = (
         <div>
@@ -69,7 +74,11 @@ export default function Navbar(props) {
       <CssBaseline />
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
-            <IconButton />
+            <IconButton onClick={changeOpenStatus}
+              color='inherit'   
+              sx={{mr:2, display:{sm:"none"}}}>
+              <MenuIcon/>
+            </IconButton>
           <Typography variant="h6" noWrap component="div">
             Our Application
           </Typography>
@@ -86,6 +95,21 @@ export default function Navbar(props) {
       >
          {myDrawer}
       </Drawer>
+
+       <Drawer
+        variant="temporary"
+        open = {open}
+        onClose={changeOpenStatus}
+        sx={{
+            display: {xs: "block",  sm:"none"},
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
+         {myDrawer}
+      </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
 
