@@ -5,11 +5,28 @@ import MyTextField from "./forms/MyTextFields";
 import MyDatePicker from "./forms/MyDatePickerField";
 import MyMultilineField from "./forms/MyMultiplelineFields";
 import MySelectField from "./forms/MySelectField";
+import AxiosInstance from './Axios';
+import Dayjs from 'dayjs';
 
 const Create = () => {
-  const {handleSubmit, reset, setValue, control} = useForm()
+  const {handleSubmit, control} = useForm()
 
-  const submission = (data) => console.log(data);
+  const submission = (data) =>
+    {
+    const StartDate = Dayjs(data.start_date).format("YYYY-MM-DD");
+    const EndDate = Dayjs(data.end_date).format("YYYY-MM-DD");
+
+    console.log(data.name, data.status, data.comments, StartDate, EndDate);
+    AxiosInstance.post(
+      `project/`, {
+        name: data.name,
+        status : data.status,
+        comments: data.comments,
+        start_date:StartDate,
+        end_date: EndDate,
+      }
+    )
+  };
   return (
 
     <div>
