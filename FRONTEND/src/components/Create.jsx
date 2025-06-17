@@ -1,12 +1,73 @@
 import React from 'react'
-import {Box} from '@mui/material';
+import {Box, Typography, Button} from '@mui/material';
+import { useForm } from 'react-hook-form';
+import MyTextField from "./forms/MyTextFields";
+import MyDatePicker from "./forms/MyDatePickerField";
+import MyMultilineField from "./forms/MyMultiplelineFields";
+import MySelectField from "./forms/MySelectField";
 
 const Create = () => {
-  return (
-    <div>
-      <Box sx={{display:'flex', width:"100%", backgroundColor:'#0003f'}}>
+  const {handleSubmit, reset, setValue, control} = useForm()
 
-      </Box>
+  const submission = (data) => console.log(data);
+  return (
+
+    <div>
+        <form onSubmit={handleSubmit(submission)}>       
+            <Box sx={{display:'flex', width:"100%", backgroundColor:'#00003f', marginBottom: "10px"}}>
+                  <Typography sx={{marginLeft:"20px", color: "#fff"}}>
+                      Create records
+                  </Typography>
+            </Box>
+
+            <Box sx={{display:'flex', width:"100%",boxShadow:3, padding: 4, flexDirection:"column"}}>
+                  <Box sx={{display:'flex', justifyContent:'space-around'}}>
+                      <MyTextField
+                          label="Name"
+                          name="name"
+                          control={control}
+                          placeholder="Provide a project name"
+                          width={"30%"}
+                      />
+
+                      <MyDatePicker
+                          label="Start Date"
+                          name="start_date"
+                          control={control}
+                          width={"30%"}
+                      />
+
+                      <MyDatePicker
+                          label="End Date"
+                          name="end_date"
+                          control={control}
+                          width={"30%"}
+                      />
+              </Box>
+
+              <Box sx={{display:'flex', justifyContent:'space-around', marginTop: "20px"}}>
+                      <MyMultilineField
+                          label="Comments"
+                          name="comments"
+                          control={control}
+                          placeholder="Provide a project comments"
+                          width={"30%"}
+                      />
+
+                      <MySelectField
+                          label="Status"
+                          name="status"
+                          control={control}
+                          width={"30%"}
+                      />
+
+                      <Box sx={{width:"30%"}}>
+                          <Button variant="contained" type="submit" sx={{width:"100%"}}>Submit</Button>
+                      </Box>
+              </Box>
+            </Box>
+
+       </form>
 
     </div>
   )
