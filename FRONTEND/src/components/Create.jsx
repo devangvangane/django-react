@@ -7,8 +7,10 @@ import MyMultilineField from "./forms/MyMultiplelineFields";
 import MySelectField from "./forms/MySelectField";
 import AxiosInstance from './Axios';
 import Dayjs from 'dayjs';
+import {useNavigate} from 'react-router-dom';
 
 const Create = () => {
+  const navigate = useNavigate()
   const {handleSubmit, control} = useForm()
 
   const submission = (data) =>
@@ -26,6 +28,9 @@ const Create = () => {
         end_date: EndDate,
       }
     )
+    .then(()=>{
+      navigate(`/`)
+    })
   };
   return (
 
